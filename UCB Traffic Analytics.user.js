@@ -79,7 +79,7 @@ style.innerHTML = 'body {margin:0;padding:0}' +
                   '#ipadresse{padding-right:0}' +
                   '.boxtextsmall{font-size: 0.8em;display:inline-block;color: rgba(54, 64, 74, 0.7)}' +
                   '.boxdescription{font-size: 0.8em;display:block;padding-top:0.5em;text-transform:uppercase;color: rgba(54, 64, 74, 0.55);font-weight: 600;}' +
-                  '#barchart{text-align:center;box-sizing: border-box;width:100%;border: 1px solid rgba(54, 64, 74, 0.05);border-radius: 5px;background-clip: padding-box;margin-bottom: 20px;background-color: #ffffff;float:left;height:250px}' +
+                  '#barchart{text-align:center;box-sizing: border-box;width:100%;border: 1px solid rgba(54, 64, 74, 0.05);border-radius: 5px;background-clip: padding-box;margin-bottom: 20px;background-color: #ffffff;float:left;height:280px}' +
                   'h3{font-size:1em;text-align:left;margin:0}' +
                   'p{line-height: 1.4em;font-size: 0.9em;width:100%;margin:.5em 0;}' +
                   '.infos{background: #FFFFFF;padding: 1em 1.5em;border-radius: 5px;border: 1px solid rgba(54, 64, 74, 0.05);width: 100%;box-sizing: border-box;background-clip: padding-box;margin-bottom:20px}' +
@@ -388,14 +388,31 @@ $("#daten").before("<div id=\"barchart\"></div>")
 moment.locale('de');
 var datumgeiler = document.getElementsByClassName("datum");
 for (var i = 0; i < datumgeiler.length; i++) {
-    datumgeiler[i].innerHTML = moment(datumgeiler[i].innerHTML).format("D");
+    datumgeiler[i].innerHTML = moment(datumgeiler[i].innerHTML).format("D.M.");
 }
 
 // table-to-json (ohne spalte Summe)
 var tabledata = $('#daten').tableToJSON({ignoreColumns:[3]});
 tabledata.reverse();
 console.log(tabledata);
-//alert(JSON.stringify(tabledata));  
+ 
+
+// Alle Tage schon anzeigen, auch wenn noch keine Daten vorhanden sind
+var tagebleiben = moment().daysInMonth() - moment().format("D");
+if (tagebleiben != 0) {
+    var tage = parseInt(moment().format("D"))+1;
+    var monat = parseInt(moment().format("M"));
+    for (var i = 0; i < tagebleiben; i++) {
+      var data = 
+      { 
+        "Tag": tage+"."+monat+".",
+        "Empfangen": null,
+        "Gesendet": null
+      };    
+    tabledata.push(data);
+    tage++;
+    }
+}
 
 // chart erstellen
 new Morris.Bar({
@@ -407,7 +424,9 @@ new Morris.Bar({
   hideHover: true,
   gridLineColor: '#eeeeee',
   labels: ['Gesendet', 'Empfangen'],
-  barColors: ['#23378b', '#56af31']
+  barColors: ['#23378b', '#56af31'],
+  barRatio: 0.8,
+  xLabelAngle: 45
 });
 
 // Und nochmal Megabytes in der Datentabelle userfreundlicher darstellen (Muss unbedingt nach Erstellung des Charts erfolgen!)
@@ -418,7 +437,7 @@ for (var i = 0; i < komma.length; i++) {
 
 var datumgeiler = document.getElementsByClassName("datum");
 for (var i = 0; i < datumgeiler.length; i++) {
+    datumgeiler[i].innerHTML = datumgeiler[i].innerHTML.replace("."+moment().format("M")+".", '');
     datumgeiler[i].innerHTML = moment().format("MM-") + datumgeiler[i].innerHTML + moment().format("-YYYY");
-    datumgeiler[i].innerHTML = moment(datumgeiler[i].innerHTML).format("dddd, Do MMMM YYYY");
+    datumgeiler[i].innerHTML = moment(datumgeiler[i].innerHTML, "MM-D-YYYY").format("dddd, Do MMMM YYYY");
 }
-
