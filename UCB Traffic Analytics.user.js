@@ -66,12 +66,12 @@ document.getElementsByTagName('head')[0].appendChild(morriscss);
 var style = document.createElement('style');
 style.type = 'text/css';
 style.innerHTML = 'body {margin:0;padding:0}' +
-                  '#wrapper {color: rgb(54, 64, 74);background:#ebeff2;margin:0;padding:0}' +
+                  '#wrapper, #footer {color: rgb(54, 64, 74);background:#ebeff2;margin:0;padding:0}' +
                   '#header {display:block;box-sizing: border-box;background-color: #ffffff;box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.15);border: none;margin: 0;width:100%}' +
                   '#headerinner {display:block;height:60px;padding-top:14px;box-sizing: border-box;border: none;margin: 0 auto;width:960px}' +
                   '#logo {display:inline-block;height:32px;width:32px}' +
                   'h2{display:inline-block; padding:0; margin:0 0 0 14px;font-size:1.5em;line-height:32px;position:relative;top:-5px}' +
-                  '#content{display:block;width:960px;margin: 0 auto;padding-bottom:20px;}' +
+                  '#content{display:block;width:960px;margin: 0 auto;padding-bottom:20px}' +
                   'h1{font-size:1.2em;text-align:left;margin:20px 0;color: #505458;font-weight:600}' +
                   '.topbox{text-align:center;box-sizing: border-box;width:225px;padding: 15px;border: 1px solid rgba(54, 64, 74, 0.05);border-radius: 5px;background-clip: padding-box;margin: 0 20px 20px 0;background-color: #ffffff;float:left}' +
                   '.box4{margin-right:0;}' +
@@ -82,7 +82,7 @@ style.innerHTML = 'body {margin:0;padding:0}' +
                   '#barchart{text-align:center;box-sizing: border-box;width:100%;border: 1px solid rgba(54, 64, 74, 0.05);border-radius: 5px;background-clip: padding-box;margin-bottom: 20px;background-color: #ffffff;float:left;height:280px}' +
                   'h3{font-size:1em;text-align:left;margin:0}' +
                   'p{line-height: 1.4em;font-size: 0.9em;width:100%;margin:.5em 0;}' +
-                  '.infos{background: #FFFFFF;padding: 1em 1.5em;border-radius: 5px;border: 1px solid rgba(54, 64, 74, 0.05);width: 100%;box-sizing: border-box;background-clip: padding-box;margin-bottom:20px}' +
+                  '.infos{background: #FFFFFF;padding: 1em 1.5em;border-radius: 5px;border: 1px solid rgba(54, 64, 74, 0.05);width: 100%;box-sizing: border-box;background-clip: padding-box}' +
                   '#daten{font-size:0.8em;width: 100%;background: #FFF;margin: 20px 0;border: 1px solid rgba(34,36,38,.15);box-shadow: none;border-radius: .28571429rem;text-align: left;color: rgba(0,0,0,.87);border-collapse: separate;border-spacing: 0;}' +
                   'thead tr:first-child>th:first-child {border-radius: .28571429rem 0 0;}' +
                   'thead tr:first-child>th:last-child {border-radius: 0 .28571429rem 0 0;}' +
@@ -92,7 +92,8 @@ style.innerHTML = 'body {margin:0;padding:0}' +
                   'tr td {border-top: 1px solid rgba(34,36,38,.1);}' +
                   'tr:first-child td {border-top: none;}' +
                   'td {padding: .71428571em;text-align: inherit;}' +
-                  '.morris-hover.morris-default-style {  border-radius: 5px;  padding: 10px 12px;  color: #666;  background: rgba(54, 64, 74,0.9);  border: none;  color: #ffffff !important;}.morris-hover.morris-default-style .morris-hover-point {  color: #f4f8fb !important;}';
+                  '.morris-hover.morris-default-style {  border-radius: 5px;  padding: 10px 12px;  color: #666;  background: rgba(54, 64, 74,0.9);  border: none;  color: #ffffff !important;}.morris-hover.morris-default-style .morris-hover-point {  color: #f4f8fb !important;}' +
+                  '#footer {font-size:0.8em;padding-bottom:20px;}';
 document.getElementsByTagName('head')[0].appendChild(style);
 
 // JS Assets direkt einbinden, is scheiße aber anders gings nicht
@@ -244,7 +245,7 @@ head.innerHTML = head.innerHTML.replace("<span>","").replace("Tages","Traffic").
 // Neuen Footer (der Link im Alten führt eh ins 404)
 var footer = document.querySelectorAll("div[align=center]")[0];
 footer.setAttribute('id','footer');
-footer.innerHTML = "Hier kommt ein Footer hin";
+footer.innerHTML = "Ein weiteres kleines Projekt von Tad Wohlrapp";
 
 // Weitere Infos unten
 $("p").wrapAll( "<div class='infos' />");
@@ -262,7 +263,7 @@ $('#content').contents().filter(function(){
   .remove();
 
 // Header erstellen
-$("#wrapper").prepend("<div id=\"header\"><div id=\"headerinner\"><span id=\"logo\"><img alt=\"UCB Traffic Analytics Logo\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOVJREFUeNpi/P//P8NAAiaGAQYsICJ8g9EBIGWPRf7gyoBzDsM6BEYdMDgSISUAmIATgFQCDukCYCK+QFMHAIECjhwEAgKjaWDUATTPBUTkEgMcifEDKIew0MGTE3DVM0DsMJoGRh3AQkQqBjVI9uOQbhyNgtGS8Ml+Q4Nvz4WxyvEpPleRsLxKWwf8+sgt8PmRGFY5TtEPPEMjCl6e1pD4+5MVQ5KZ/beEuOkN2jvg3VUF8W8vhDAkuSTeidPFAbQE1xd46OPwnD5DwFDIho93mxi8OquGVU5Q4xHF/cYBDwGAAAMAYhc5uADYQ2QAAAAASUVORK5CYII=\" /></span><h2>UCB Traffic Analytics</h2></div></div>");
+$("#wrapper").prepend("<div id=\"header\"><div id=\"headerinner\"><span id=\"logo\"><img alt=\"UCB Traffic Analytics Logo\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOVJREFUeNpi/P//P8NAAiaGAQYsICJ8g9EBIGWPRf7gyoBzDsM6BEYdMDgSISUAmIATgFQCDukCYCK+QFMHAIECjhwEAgKjaWDUATTPBUTkEgMcifEDKIew0MGTE3DVM0DsMJoGRh3AQkQqBjVI9uOQbhyNgtGS8Ml+Q4Nvz4WxyvEpPleRsLxKWwf8+sgt8PmRGFY5TtEPPEMjCl6e1pD4+5MVQ5KZ/beEuOkN2jvg3VUF8W8vhDAkuSTeidPFAbQE1xd46OPwnD5DwFDIho93mxi8OquGVU5Q4xHF/cYBDwGAAAMAYhc5uADYQ2QAAAAASUVORK5CYII=\" /></span><h2>UCB Traffic Analytics</h2><span style=\"font-size:xx-small;color:#999\">v0.1 BETA</span></div></div>");
 
 // Reihenfolge korrigieren
 $("h1").detach().insertBefore("#ipadresse");
@@ -414,6 +415,9 @@ if (tagebleiben != 0) {
     }
 }
 
+// optimaler verbrauch
+var topgoal = 102400 / parseInt(moment().daysInMonth());
+
 // chart erstellen
 new Morris.Bar({
   element: 'barchart',
@@ -426,7 +430,10 @@ new Morris.Bar({
   labels: ['Gesendet', 'Empfangen'],
   barColors: ['#23378b', '#56af31'],
   barRatio: 0.8,
-  xLabelAngle: 45
+  xLabelAngle: 45,
+  goals: [topgoal],
+  goalStrokeWidth: 2,
+  goalLineColors: ['rgba(86,175,49,0.5)']
 });
 
 // Und nochmal Megabytes in der Datentabelle userfreundlicher darstellen (Muss unbedingt nach Erstellung des Charts erfolgen!)
